@@ -6,9 +6,7 @@ import 'cripto.dart';
 
 class PriceScreen extends StatefulWidget {
   PriceScreen({this.cryptoRate});
-
   final cryptoRate;
-
   @override
   _PriceScreenState createState() => _PriceScreenState();
 }
@@ -23,13 +21,11 @@ class _PriceScreenState extends State<PriceScreen> {
   void getData() async {
     isWaiting = true;
     try {
-      for (String cripto in cryptoList) {
-        var data = await crypto.getCriptoPrice(cripto, selectedCurrency);
-        isWaiting = false;
-        setState(() {
-          coinValues = data;
-        });
-      }
+      var data = await CriptoPrice().getCriptoPrice(selectedCurrency);
+      isWaiting = false;
+      setState(() {
+        coinValues = data;
+      });
     } catch (e) {
       print(e);
     }
